@@ -1,0 +1,8 @@
+directories:
+  .
+
+# Automatically includes all relevant targets under the 'directories' above
+derive_targets_from_directories: true
+
+additional_languages:
+  go

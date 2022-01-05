@@ -1,2 +1,3 @@
-# backbone-services
-Abstract backbone services for your apps
+# Collection of opinionated services with pluggable implementations
+
+Current status: Work in Progress

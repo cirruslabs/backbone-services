@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+option go_package = "github.com/cirruslabs/backbone-services/proto/cache";
+option java_package = "org.cirruslabs.services.cache";
+
+package cache;
+
+import "google/protobuf/empty.proto";
+
+service Cache {
+  rpc Get (GetRequest) returns (GetResponse) {
+  }
+  rpc Put (PutRequest) returns (google.protobuf.Empty) {
+  }
+  rpc CompareAndSet (CASRequest) returns (CASResponse) {
+  }
+  rpc CompareAndDelete (CADRequest) returns (CADResponse) {
+  }
+  rpc MultiDelete (MultiDeleteRequest) returns (google.protobuf.Empty) {
+  }
+  rpc RateLimit (RateLimitRequest) returns (RateLimitResponse) {
+  }
+  rpc Inc (IncRequest) returns (CounterResponse) {
+  }
+  rpc Dec (DecRequest) returns (CounterResponse) {
+  }
+}
+
+message GetRequest {
+  repeated string keys = 1;
+}
+
+message GetResponse {
+  map<string, bytes> cache_entries = 1;
+}
+
+message PutRequest {
+  map<string, bytes> entries = 1;
+  int64 expires_in_seconds = 2;
+}
+
+message CASRequest {
+  string key = 1;
+  bytes expected_entry = 2;
+  bytes updated_entry = 3;
+  int64 expires_in_seconds = 4;
+}
+
+message CASResponse {
+  bool success = 1;
+}
+
+message CADRequest {
+  string key = 1;
+  bytes expected_entry = 2;
+}
+
+message CADResponse {
+  bool success = 1;
+}
+
+message MultiDeleteRequest {
+  repeated string keys = 1;
+}
+
+message ListValue {
+  repeated bytes items = 1;
+}
+
+message RateLimitRequest {
+  string key = 1;
+  int64 increment_rate_by = 2;
+  int64 limit_duration_in_seconds = 3;
+}
+
+message RateLimitResponse {
+  int64 current_rate = 1;
+}
+
+message IncRequest {
+  string key = 1;
+  int64 increment_by = 2;
+  int64 limit_duration_in_seconds = 3;
+}
+
+message DecRequest {
+  string key = 1;
+  int64 decrement_by = 2;
+  int64 limit_duration_in_seconds = 3;
+}
+
+message CounterResponse {
+  int64 value = 1;
+}

@@ -1,0 +1,16 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# run via bazel run //:gazelle
+# gazelle:prefix github.com/cirruslabs/backbone-services
+gazelle(name = "gazelle")
+
+# run via bazel run //:gazelle-update-repos
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=go.mod",
+        "-to_macro=deps.bzl%go_dependencies",
+        "-prune",
+    ],
+    command = "update-repos",
+)
