@@ -1,7 +1,6 @@
 .idea
 
-.ijwb/.blaze
-.ijwb/.idea
+.ijwb
 
 
 bazel-*
