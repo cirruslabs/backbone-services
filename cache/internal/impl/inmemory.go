@@ -9,6 +9,10 @@ import (
 type inmemory struct {
 }
 
+func NewInmemory() *inmemory {
+	return &inmemory{}
+}
+
 func (i inmemory) Get(ctx context.Context, request *cache.GetRequest) (*cache.GetResponse, error) {
 	panic("implement me")
 }

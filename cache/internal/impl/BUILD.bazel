@@ -5,4 +5,8 @@ go_library(
     srcs = ["inmemory.go"],
     importpath = "github.com/cirruslabs/backbone-services/cache/internal/impl",
     visibility = ["//cache:__subpackages__"],
+    deps = [
+        "//proto/cache",
+        "@org_golang_google_protobuf//types/known/emptypb",
+    ],
 )
