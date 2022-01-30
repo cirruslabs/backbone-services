@@ -5,11 +5,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/cirruslabs/backbone-services/cache/cmd/cache",
     visibility = ["//visibility:private"],
-    deps = [
-        "//cache/internal/impl",
-        "//proto/cache",
-        "@org_golang_google_grpc//:go_default_library",
-    ],
+    deps = ["@org_golang_google_grpc//:go_default_library"],
 )
 
 go_binary(

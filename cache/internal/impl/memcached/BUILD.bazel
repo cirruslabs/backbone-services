@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "memcached",
+    srcs = ["memcached.go"],
+    importpath = "github.com/cirruslabs/backbone-services/cache/internal/impl/memcached",
+    visibility = ["//cache:__subpackages__"],
+    deps = [
+        "//proto/cache",
+        "@com_github_bradfitz_gomemcache//memcache",
+        "@org_golang_google_protobuf//types/known/emptypb",
+    ],
+)
+
+go_test(
+    name = "memcached_test",
+    srcs = ["memcached_test.go"],
+    embed = [":memcached"],
+    deps = [
+        "//cache/internal/impl/testing",
+        "@com_github_docker_go_connections//nat",
+        "@com_github_testcontainers_testcontainers_go//:testcontainers-go",
+        "@com_github_testcontainers_testcontainers_go//wait",
+    ],
+)
