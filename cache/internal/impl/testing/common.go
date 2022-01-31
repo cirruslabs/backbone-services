@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/cirruslabs/backbone-services/proto/cache"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/test/bufconn"
@@ -28,9 +29,8 @@ func TestCacheImplementation(t *testing.T, srv cache.CacheServer) {
 		}),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	defer conn.Close()
 	client := cache.NewCacheClient(conn)
 
@@ -46,17 +46,12 @@ func testGet(t *testing.T, client cache.CacheClient) {
 		},
 		ExpiresInSeconds: 60,
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	resp, err := client.Get(context.Background(), &cache.GetRequest{
 		Keys: []string{"foo"},
 	})
-	if err != nil {
-		return
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
+
+	require.NoError(t, err)
 	assert.Equal(t, []byte("bar"), resp.GetCacheEntries()["foo"])
 }

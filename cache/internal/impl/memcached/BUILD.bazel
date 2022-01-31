@@ -18,7 +18,7 @@ go_test(
     embed = [":memcached"],
     deps = [
         "//cache/internal/impl/testing",
-        "@com_github_docker_go_connections//nat",
+        "@com_github_stretchr_testify//require",
         "@com_github_testcontainers_testcontainers_go//:testcontainers-go",
         "@com_github_testcontainers_testcontainers_go//wait",
     ],

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	commontesting "github.com/cirruslabs/backbone-services/cache/internal/impl/testing"
+	"github.com/stretchr/testify/require"
 	"github.com/testcontainers/testcontainers-go"
 	"github.com/testcontainers/testcontainers-go/wait"
 	"testing"
@@ -19,25 +20,19 @@ func TestMemcached(t *testing.T) {
 		ContainerRequest: req,
 		Started:          true,
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	ip, err := container.Host(context.Background())
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	mappedPort, err := container.MappedPort(context.Background(), "11211")
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	server, err := NewMemcached(
 		fmt.Sprintf("%s:%s", ip, mappedPort.Port()),
 	)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
+
 	t.Run("Memcached", func(t *testing.T) {
 		commontesting.TestCacheImplementation(t, server)
 	})
