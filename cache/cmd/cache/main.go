@@ -3,8 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/cirruslabs/backbone-services/cache/internal/impl"
-	"github.com/cirruslabs/backbone-services/proto/cache"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -22,6 +20,5 @@ func main() {
 	}
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	cache.RegisterCacheServer(grpcServer, impl.NewInmemory())
 	grpcServer.Serve(lis)
 }
