@@ -1,5 +1,9 @@
 docker_builder:
   name: test
-  install_script: go install github.com/bazelbuild/bazelisk@latest
+  env:
+    PATH: $PATH:/usr/local/go/bin
+  install_script: 
+    - wget --no-verbose -O - https://golang.org/dl/go1.17.linux-amd64.tar.gz | tar -C /usr/local -xz
+    - go install github.com/bazelbuild/bazelisk@latest
   build_script: bazel build //...
   test_script: bazel test //...
