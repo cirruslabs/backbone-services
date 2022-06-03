@@ -1,0 +1,10 @@
+docker_builder:
+  name: test
+  env:
+    HOME: /root
+  install_script: 
+    - curl https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-amd64 -o bazel
+    - chmod +x bazel
+    - sudo mv bazel /usr/bin/
+  build_script: bazel build //...
+  test_script: bazel test //...
