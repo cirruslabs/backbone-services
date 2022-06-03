@@ -2,8 +2,9 @@ docker_builder:
   name: test
   env:
     HOME: /root
+    GOBIN: /root/go/bin
     GOROOT: /usr/local/go
-    PATH: $PATH:$HOME/go/bin:$GOROOT/bin
+    PATH: $PATH:$GOBIN:$GOROOT/bin:$GOROOT/bin
   install_script: 
     - wget --no-verbose -O - https://golang.org/dl/go1.17.linux-amd64.tar.gz | tar -C /usr/local -xz
     - go install github.com/bazelbuild/bazelisk@latest
