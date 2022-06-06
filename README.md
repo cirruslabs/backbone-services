@@ -1,5 +1,7 @@
 # Collection of opinionated services with pluggable implementations
 
+Status of the projects: a concept and very WIP 😅
+
 This project is build from two assumptions: 
 1. Majority of applications don't need full potential of relational databases, distributed event store platforms, etc.
 2. It's possible to build an opiniated and simple set of APIs to satisfy needs of majority applications.
